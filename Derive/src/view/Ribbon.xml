@@ -5,7 +5,7 @@
   <ribbon>
     <tabs>
       <tab idMso="TabData">
-        <group idQ="excelAddin:groupExcelAddins">
+        <group idQ="excelAddin:groupExcelAddins" label="Analysis">
                <button id="ButtonDerive"
                        getLabel="getButtonDeriveLabel"/>
         </group>
