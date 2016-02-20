@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui"
+          xmlns:excelAddin="http://schemas.microsoft.com/office/2006/excel/addins"
+          onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab idMso="TabData">
+        <group idQ="excelAddin:groupExcelAddins">
+               <button id="ButtonDerive"
+                       getLabel="getButtonDeriveLabel"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+
