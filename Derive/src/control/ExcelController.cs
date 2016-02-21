@@ -24,6 +24,7 @@ namespace Derive.control
         }
 
         private CustomTaskPane taskPane;
+        private TaskPaneControl taskPaneControl;
         private RibbonAddition ribbonAddition;
 
         #endregion
@@ -49,11 +50,23 @@ namespace Derive.control
 
         #region taskpane
 
+        /**
+         * The structure of the task pane will be as folows:
+         *    CustomTaskPane taskPane (created and added in ThisAddIn.createTaskPane())
+         *      UserControl winFormsProxyUserControl (created and added in ThisAddIn.createTaskPane())
+         *        ElementHost wpfControlHost (created and added here)
+         *          TaskPaneControl taskPaneControl (created and added here)
+         */
         private void initTaskPane(CustomTaskPane taskPane) {
-            ElementHost controlHost = new ElementHost();
-            controlHost.Dock = System.Windows.Forms.DockStyle.Fill;
-            controlHost.Child = new TaskPaneControl();
-            taskPane.Control.Controls.Add(controlHost);
+            // create taskPaneControl
+            this.taskPaneControl = new TaskPaneControl();
+            // create wpfControlHost and add taskPaneControl
+            ElementHost wpfControlHost = new ElementHost();
+            wpfControlHost.Dock = System.Windows.Forms.DockStyle.Fill;
+            wpfControlHost.Child = taskPaneControl;
+            // add wpfControlHost to taskPaneControl
+            taskPane.Control.Controls.Add(wpfControlHost);
+            // set taskPane visibility handler
             taskPane.VisibleChanged += taskPaneVisibleChanged;
         }
 

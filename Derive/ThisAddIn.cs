@@ -16,10 +16,7 @@ namespace Derive
         private void startUp(object sender, System.EventArgs e)
         {
             setCulture();
-
-            UserControl taskPaneControl = new UserControl();
-            CustomTaskPane taskPane = this.CustomTaskPanes.Add(taskPaneControl, language.TaskPaneTitle);
-            excelController = new ExcelController(taskPane, ribbonAddition);
+            excelController = new ExcelController(createTaskPane(), ribbonAddition);
         }
 
         private void setCulture() {
@@ -28,6 +25,15 @@ namespace Derive
                     Application.LanguageSettings.get_LanguageID(
                         Microsoft.Office.Core.MsoAppLanguageID.msoLanguageIDUI));
             //TODO dit zet de culture in en-US ipv de verwachte culture...
+        }
+
+        private CustomTaskPane createTaskPane() {
+            // create winFormsProxyUserControl
+            UserControl winFormsProxyUserControl = new UserControl();
+            // create taskPane and add winFormsProxyUserControl
+            CustomTaskPane taskPane = this.CustomTaskPanes.Add(winFormsProxyUserControl, language.TaskPaneTitle);
+            // return taskPane
+            return taskPane;
         }
 
         private void shutDown(object sender, System.EventArgs e) {
