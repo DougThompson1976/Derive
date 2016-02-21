@@ -6,8 +6,10 @@
     <tabs>
       <tab idMso="TabData">
         <group idQ="excelAddin:groupExcelAddins" label="Analysis">
-               <button id="ButtonDerive"
-                       getLabel="getButtonDeriveLabel"/>
+               <toggleButton id="ButtonDerive"
+                             getLabel="getButtonDeriveLabel"
+                             onAction="buttonDeriveOnAction"
+                             getPressed="getButtonDerivePressed"/>
         </group>
       </tab>
     </tabs>

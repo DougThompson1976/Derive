@@ -68,5 +68,14 @@ namespace Derive.res {
                 return ResourceManager.GetString("RibbonButtonDeriveLabel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Derive.
+        /// </summary>
+        internal static string TaskPaneTitle {
+            get {
+                return ResourceManager.GetString("TaskPaneTitle", resourceCulture);
+            }
+        }
     }
 }

@@ -1,13 +1,28 @@
-﻿using Derive.src.view;
+﻿using Derive.control;
+using Derive.res;
+using Derive.view;
+using Microsoft.Office.Tools;
+using System.Windows.Forms;
 
 namespace Derive
 {
     public partial class ThisAddIn
     {
+        private ExcelController excelController;
+        private RibbonAddition ribbonAddition;
+
         #region start and stop
 
         private void startUp(object sender, System.EventArgs e)
         {
+            setCulture();
+
+            UserControl taskPaneControl = new UserControl();
+            CustomTaskPane taskPane = this.CustomTaskPanes.Add(taskPaneControl, language.TaskPaneTitle);
+            excelController = new ExcelController(taskPane, ribbonAddition);
+        }
+
+        private void setCulture() {
             System.Threading.Thread.CurrentThread.CurrentUICulture =
                 new System.Globalization.CultureInfo(
                     Application.LanguageSettings.get_LanguageID(
@@ -15,9 +30,8 @@ namespace Derive
             //TODO dit zet de culture in en-US ipv de verwachte culture...
         }
 
-        private void shutDown(object sender, System.EventArgs e)
-        {
-
+        private void shutDown(object sender, System.EventArgs e) {
+            excelController.shutDown();
         }
 
         #endregion
@@ -25,7 +39,8 @@ namespace Derive
         #region ribbon
 
         protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject() {
-            return new Ribbon();
+            this.ribbonAddition = new RibbonAddition();
+            return this.ribbonAddition;
         }
 
         #endregion
@@ -36,8 +51,7 @@ namespace Derive
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InternalStartup()
-        {
+        private void InternalStartup() {
             this.Startup += new System.EventHandler(startUp);
             this.Shutdown += new System.EventHandler(shutDown);
         }

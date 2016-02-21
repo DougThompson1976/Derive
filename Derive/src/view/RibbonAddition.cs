@@ -1,40 +1,71 @@
-﻿using Derive.res;
+﻿using Derive.control;
+using Derive.res;
+using Microsoft.Office.Tools.Ribbon;
 using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using Office = Microsoft.Office.Core;
 
-namespace Derive.src.view
+namespace Derive.view
 {
     [ComVisible(true)]
-    public class Ribbon : Office.IRibbonExtensibility
+    public class RibbonAddition : Office.IRibbonExtensibility
     {
         private Office.IRibbonUI ribbon;
+        private bool buttonDeriveChecked;
 
-        public Ribbon() {
+        public RibbonAddition() {
+            // empty constructor
         }
 
-        #region IRibbonExtensibility Members
+        #region control
 
-        public string GetCustomUI(string ribbonID) {
-            return GetResourceText("Derive.src.view.Ribbon.xml");
+        internal void checkButtonDerive() {
+            buttonDeriveChecked = true;
+            this.ribbon.InvalidateControl("ButtonDerive");
+        }
+
+        internal void uncheckButtonDerive() {
+            buttonDeriveChecked = false;
+            this.ribbon.InvalidateControl("ButtonDerive");
         }
 
         #endregion
 
-        #region Ribbon Callbacks
+        #region IRibbonExtensibility Members
+
+        public string GetCustomUI(string ribbonID) {
+            return GetResourceText("Derive.src.view.RibbonAddition.xml");
+        }
+
+        #endregion
+
+        #region callbacks
         
         public void Ribbon_Load(Office.IRibbonUI ribbonUI) {
             this.ribbon = ribbonUI;
-        }
-
-        public String getAnalysisGroupLabel(Office.IRibbonControl control) {
-            return "Analyse";
+            buttonDeriveChecked = false;
         }
 
         public String getButtonDeriveLabel(Office.IRibbonControl control) {
             return language.RibbonButtonDeriveLabel;
+        }
+
+        public void buttonDeriveOnAction(Office.IRibbonControl control, bool pressed) {
+            if(pressed) {
+                buttonDeriveChecked = true;
+                ExcelController.Instance.showTaskPane();
+            }
+            else {
+                buttonDeriveChecked = false;
+                ExcelController.Instance.hideTaskPane();
+            }
+        }
+
+        public bool getButtonDerivePressed(Office.IRibbonControl control) {
+            return buttonDeriveChecked;
         }
 
         #endregion

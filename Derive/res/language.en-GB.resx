@@ -120,4 +120,7 @@
   <data name="RibbonButtonDeriveLabel" xml:space="preserve">
     <value>Derive</value>
   </data>
+  <data name="TaskPaneTitle" xml:space="preserve">
+    <value>Derive</value>
+  </data>
 </root>
