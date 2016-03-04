@@ -25,6 +25,8 @@ namespace Derive.control
 
         private CustomTaskPane taskPane;
         private TaskPaneControl taskPaneControl;
+        private RuleListController ruleListController;
+
         private RibbonAddition ribbonAddition;
 
         #endregion
@@ -40,6 +42,7 @@ namespace Derive.control
             this.taskPane = taskPane;
             this.ribbonAddition = ribbonAddition;
             initTaskPane(taskPane);
+            this.ruleListController = new RuleListController(taskPaneControl);
         }
 
         internal void shutDown() {
@@ -53,9 +56,9 @@ namespace Derive.control
         /**
          * The structure of the task pane will be as folows:
          *    CustomTaskPane taskPane (created and added in ThisAddIn.createTaskPane())
-         *      UserControl winFormsProxyUserControl (created and added in ThisAddIn.createTaskPane())
-         *        ElementHost wpfControlHost (created and added here)
-         *          TaskPaneControl taskPaneControl (created and added here)
+         *      UserControl winFormsProxyUserControl (created and added in ThisAddIn.createTaskPane() on taskPane creation)
+         *        ElementHost wpfControlHost (created and added here to winFormsProxyUserControl.Controls)
+         *          TaskPaneControl taskPaneControl (created and added here as wpfControlHost.Child)
          */
         private void initTaskPane(CustomTaskPane taskPane) {
             // create taskPaneControl
@@ -64,18 +67,18 @@ namespace Derive.control
             ElementHost wpfControlHost = new ElementHost();
             wpfControlHost.Dock = System.Windows.Forms.DockStyle.Fill;
             wpfControlHost.Child = taskPaneControl;
-            // add wpfControlHost to taskPaneControl
+            // add wpfControlHost to winFormsProxyUserControl
             taskPane.Control.Controls.Add(wpfControlHost);
             // set taskPane visibility handler
-            taskPane.VisibleChanged += taskPaneVisibleChanged;
+            taskPane.VisibleChanged += onTaskPaneVisibilityChanged;
         }
 
-        void taskPaneVisibleChanged(object sender, EventArgs e) {
+        void onTaskPaneVisibilityChanged(object sender, EventArgs e) {
             if (taskPane.Visible) {
-                ribbonAddition.checkButtonDerive();
+                checkRibbonDeriveButton();
             }
             else {
-                ribbonAddition.uncheckButtonDerive();
+                uncheckRibbonDeriveButton();
             }
         }
 
@@ -85,6 +88,18 @@ namespace Derive.control
 
         internal void hideTaskPane() {
             taskPane.Visible = false;
+        }
+
+        #endregion
+
+        #region ribbon
+
+        internal void checkRibbonDeriveButton() {
+            ribbonAddition.checkButtonDerive();
+        }
+
+        internal void uncheckRibbonDeriveButton() {
+            ribbonAddition.uncheckButtonDerive();
         }
 
         #endregion

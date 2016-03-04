@@ -21,5 +21,9 @@ namespace Derive.view {
         public TaskPaneControl() {
             InitializeComponent();
         }
+
+        public void addToStack(Control control) {
+            this.stack.Children.Add(control);
+        }
     }
 }

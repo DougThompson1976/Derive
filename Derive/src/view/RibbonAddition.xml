@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui"
           xmlns:excelAddin="http://schemas.microsoft.com/office/2006/excel/addins"
-          onLoad="Ribbon_Load">
+          onLoad="onRibbonLoad">
   <ribbon>
     <tabs>
       <tab idMso="TabData">
         <group idQ="excelAddin:groupExcelAddins" label="Analysis">
                <toggleButton id="ButtonDerive"
                              getLabel="getButtonDeriveLabel"
-                             onAction="buttonDeriveOnAction"
+                             onAction="onButtonDeriveAction"
                              getPressed="getButtonDerivePressed"/>
         </group>
       </tab>

@@ -165,6 +165,11 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="res\images.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>images.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="res\language.en-GB.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>language.en-GB.Designer.cs</LastGenOutput>
@@ -181,6 +186,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="res\images.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>images.resx</DependentUpon>
+    </Compile>
     <Compile Include="res\language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,11 +210,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>language.nl-BE.resx</DependentUpon>
     </Compile>
-    <Compile Include="src\control\ExcelController.cs" />
+    <Compile Include="src\control\DeriveController.cs" />
+    <Compile Include="src\control\RuleListController.cs" />
+    <Compile Include="src\view\CollapsablePane.xaml.cs">
+      <DependentUpon>CollapsablePane.xaml</DependentUpon>
+    </Compile>
     <Compile Include="src\view\RibbonAddition.cs" />
     <Compile Include="src\view\TaskPaneControl.xaml.cs">
       <DependentUpon>TaskPaneControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="src\view\TitledCollapsablePaneBuilder.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -223,10 +238,19 @@
     <EmbeddedResource Include="src\view\RibbonAddition.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="src\view\CollapsablePane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="src\view\TaskPaneControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\iconCollapse.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

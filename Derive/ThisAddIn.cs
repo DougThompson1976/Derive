@@ -3,6 +3,7 @@ using Derive.res;
 using Derive.view;
 using Microsoft.Office.Tools;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace Derive
 {
@@ -31,13 +32,14 @@ namespace Derive
             // create winFormsProxyUserControl
             UserControl winFormsProxyUserControl = new UserControl();
             // create taskPane and add winFormsProxyUserControl
-            CustomTaskPane taskPane = this.CustomTaskPanes.Add(winFormsProxyUserControl, language.TaskPaneTitle);
+            CustomTaskPane taskPane = this.CustomTaskPanes.Add(winFormsProxyUserControl, language.taskpane_title);
             // return taskPane
             return taskPane;
         }
 
         private void shutDown(object sender, System.EventArgs e) {
             excelController.shutDown();
+            Dispatcher.CurrentDispatcher.InvokeShutdown();
         }
 
         #endregion

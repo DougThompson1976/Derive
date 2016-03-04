@@ -22,14 +22,14 @@ namespace Derive.res {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class language {
+    internal class images {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal language() {
+        internal images() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Derive.res {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Derive.res.language", typeof(language).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Derive.res.images", typeof(images).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,12 @@ namespace Derive.res {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Derive.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ribbon_deriveButton_label {
+        internal static System.Drawing.Bitmap collapse_icon {
             get {
-                return ResourceManager.GetString("ribbon_deriveButton_label", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Derive.
-        /// </summary>
-        internal static string taskpane_title {
-            get {
-                return ResourceManager.GetString("taskpane_title", resourceCulture);
+                object obj = ResourceManager.GetObject("collapse_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

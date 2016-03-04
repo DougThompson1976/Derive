@@ -43,17 +43,17 @@ namespace Derive.view
         #endregion
 
         #region callbacks
-        
-        public void Ribbon_Load(Office.IRibbonUI ribbonUI) {
+
+        public void onRibbonLoad(Office.IRibbonUI ribbonUI) {
             this.ribbon = ribbonUI;
             buttonDeriveChecked = false;
         }
 
         public String getButtonDeriveLabel(Office.IRibbonControl control) {
-            return language.RibbonButtonDeriveLabel;
+            return language.ribbon_deriveButton_label;
         }
 
-        public void buttonDeriveOnAction(Office.IRibbonControl control, bool pressed) {
+        public void onButtonDeriveAction(Office.IRibbonControl control, bool pressed) {
             if(pressed) {
                 buttonDeriveChecked = true;
                 ExcelController.Instance.showTaskPane();
