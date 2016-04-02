@@ -25,5 +25,9 @@ namespace Derive.view {
         public void addToStack(Control control) {
             this.stack.Children.Add(control);
         }
+
+        public void removeFromStack(Control control) {
+            this.stack.Children.Remove(control);
+        }
     }
 }

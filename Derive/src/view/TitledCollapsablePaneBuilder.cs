@@ -10,20 +10,21 @@ namespace Derive.view {
     class TitledCollapsablePaneBuilder {
 
         private CollapsablePane pane;
+        private String title;
+        private bool titleTextEditable = false;
 
-        private TitledCollapsablePaneBuilder(CollapsablePane pane) {
+        private TitledCollapsablePaneBuilder(CollapsablePane pane, String title) {
             this.pane = pane;
+            this.title = title;
         }
 
         public static TitledCollapsablePaneBuilder create(String title) {
             CollapsablePane pane = new CollapsablePane();
 
-            addEditableLabelToTitle(pane, title);
-
-            return new TitledCollapsablePaneBuilder(pane);
+            return new TitledCollapsablePaneBuilder(pane, title);
         }
 
-        private static void addEditableLabelToTitle(CollapsablePane pane, String title) {
+        private void addEditableLabelToTitle(CollapsablePane pane, String title) {
             // create, fill and add label
             Label label = new Label();
             label.Content = title;
@@ -65,7 +66,13 @@ namespace Derive.view {
             };
 
             // wire label double mouse click to enter texbox action
-            label.MouseDoubleClick += (o,e) => enterTextbox();
+            label.MouseDoubleClick += (o, e) => {
+                if (titleTextEditable) {
+                    enterTextbox();
+                } else {
+                    pane.Collapsed = !pane.Collapsed;
+                }
+            };
             // wire textbox input
             textBox.KeyDown += (o, e) => {
                 if (e.Key == System.Windows.Input.Key.Enter) {
@@ -87,6 +94,11 @@ namespace Derive.view {
             return this;
         }
 
+        public TitledCollapsablePaneBuilder titleEditable(bool editable) {
+            this.titleTextEditable = editable;
+            return this;
+        }
+
         public TitledCollapsablePaneBuilder addIndentedChild(Control childControl) {
             pane.addIndentedChild(childControl);
             return this;
@@ -100,6 +112,8 @@ namespace Derive.view {
         #endregion
 
         public CollapsablePane build() {
+            addEditableLabelToTitle(pane, title);
+
             return pane;
         }
 

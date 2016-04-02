@@ -1,20 +1,22 @@
 ﻿using Derive.view;
 using Microsoft.Office.Tools;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 
 namespace Derive.control
 {
-    class ExcelController
+    class DeriveController
     {
         #region state
 
-        private static ExcelController instance;
-        public static ExcelController Instance {
+        private static DeriveController instance;
+        public static DeriveController Instance {
             get {
                 if (instance == null) {
                     throw new NullReferenceException("No ExcelController was created yet.");
@@ -31,9 +33,20 @@ namespace Derive.control
 
         #endregion
 
+        #region workbook events
+
+        public void onSelectionChange(Range target) {
+            if (this.ruleListController != null) {
+                this.ruleListController.clearTaskPaneControl();
+            }
+            this.ruleListController = new RuleListController(taskPaneControl, target);
+        }
+
+        #endregion
+
         #region start and stop
 
-        internal ExcelController(CustomTaskPane taskPane, RibbonAddition ribbonAddition) {
+        internal DeriveController(CustomTaskPane taskPane, RibbonAddition ribbonAddition) {
             if (instance != null) {
                 throw new Exception("An ExcelController was already created, and only one is allowed.");
             }
@@ -42,7 +55,6 @@ namespace Derive.control
             this.taskPane = taskPane;
             this.ribbonAddition = ribbonAddition;
             initTaskPane(taskPane);
-            this.ruleListController = new RuleListController(taskPaneControl);
         }
 
         internal void shutDown() {

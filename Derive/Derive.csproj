@@ -211,11 +211,18 @@
       <DependentUpon>language.nl-BE.resx</DependentUpon>
     </Compile>
     <Compile Include="src\control\DeriveController.cs" />
+    <Compile Include="src\model\FormulaElement.cs" />
+    <Compile Include="src\model\Rule.cs" />
+    <Compile Include="src\model\RuleListFormulaParser.cs" />
     <Compile Include="src\control\RuleListController.cs" />
     <Compile Include="src\view\CollapsablePane.xaml.cs">
       <DependentUpon>CollapsablePane.xaml</DependentUpon>
     </Compile>
+    <Compile Include="src\view\FormulaBox.xaml.cs">
+      <DependentUpon>FormulaBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="src\view\RibbonAddition.cs" />
+    <Compile Include="src\view\RulePaneBuilder.cs" />
     <Compile Include="src\view\TaskPaneControl.xaml.cs">
       <DependentUpon>TaskPaneControl.xaml</DependentUpon>
     </Compile>
@@ -239,6 +246,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="src\view\CollapsablePane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\view\FormulaBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

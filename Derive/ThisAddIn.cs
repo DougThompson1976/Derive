@@ -1,6 +1,7 @@
 ﻿using Derive.control;
 using Derive.res;
 using Derive.view;
+using Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Tools;
 using System.Windows.Forms;
 using System.Windows.Threading;
@@ -9,15 +10,29 @@ namespace Derive
 {
     public partial class ThisAddIn
     {
-        private ExcelController excelController;
+        private DeriveController deriveController;
         private RibbonAddition ribbonAddition;
+        private Workbook workbook;
 
         #region start and stop
 
+        // is called when a new instance of Excel is activated
         private void startUp(object sender, System.EventArgs e)
         {
             setCulture();
-            excelController = new ExcelController(createTaskPane(), ribbonAddition);
+            deriveController = new DeriveController(createTaskPane(), ribbonAddition);
+
+            Application.EnableEvents = true;
+            Application.WorkbookActivate += (workbook) => {
+                this.workbook = workbook;
+                workbook.SheetSelectionChange += (o, r) => {
+                    deriveController.onSelectionChange(r);
+                };
+            };
+        }
+
+        void Application_WorkbookActivate(Microsoft.Office.Interop.Excel.Workbook Wb) {
+            throw new System.NotImplementedException();
         }
 
         private void setCulture() {
@@ -38,7 +53,7 @@ namespace Derive
         }
 
         private void shutDown(object sender, System.EventArgs e) {
-            excelController.shutDown();
+            deriveController.shutDown();
             Dispatcher.CurrentDispatcher.InvokeShutdown();
         }
 

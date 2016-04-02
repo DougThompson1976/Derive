@@ -1,4 +1,6 @@
-﻿using Derive.view;
+﻿using Derive.model;
+using Derive.view;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,50 +11,54 @@ using System.Windows.Controls;
 namespace Derive.control {
     class RuleListController {
 
-        public TaskPaneControl taskPaneControl;
+        private TaskPaneControl taskPaneControl;
+        private List<Control> addedControls = new List<Control>();
+        private Range selection;
+        private List<Rule> rules;
 
-        public RuleListController(TaskPaneControl taskPaneControl) {
+        public RuleListController(TaskPaneControl taskPaneControl, Range selection) {
             this.taskPaneControl = taskPaneControl;
+            this.selection = selection;
 
             updateTaskPaneControl();
         }
 
         private void updateTaskPaneControl() {
-            CollapsablePane conditionPane = TitledCollapsablePaneBuilder
-                .create("Condition")
-                .addIndentedChild(new TextBox())
-                .collapsed(true)
-                .build();
+            RuleListFormulaParser parser = new RuleListFormulaParser((String)selection.Formula);
+            if(! parser.isCorrectlyFormatted()) {
+                // TODO fail gracefully
+                System.Windows.Forms.MessageBox.Show(parser.ParseException.ToString());
+                return;
+            }
+            int ruleNumber = 1;
+            this.rules = parser.Result;
+            foreach(Rule rule in rules) {
+                addToTaskPaneControl(RulePaneBuilder.create()
+                    .name("Rule " + ruleNumber)
+                    .condition(rule.Condition, (s) => {
+                        updateFormula();
+                    })
+                    .value(rule.Value, (s) => {
+                        updateFormula();
+                    })
+                    .build());
+                ruleNumber++;
+            }
+        }
 
-            CollapsablePane valuePane = TitledCollapsablePaneBuilder
-                .create("Value")
-                .addIndentedChild(new TextBox())
-                .collapsed(true)
-                .build();
+        private void addToTaskPaneControl(Control control) {
+            this.addedControls.Add(control);
+            this.taskPaneControl.addToStack(control);
+        }
 
-            CollapsablePane formattingPane = TitledCollapsablePaneBuilder
-                .create("Formatting")
-                .addIndentedChild(new TextBox())
-                .collapsed(true)
-                .build();
+        public void clearTaskPaneControl() {
+            addedControls.ForEach((control) => {
+                this.taskPaneControl.removeFromStack(control);
+            });
+        }
 
-            CollapsablePane rulePane = TitledCollapsablePaneBuilder
-                .create("Rule")
-                .collapsed(false)
-                .addIndentedChild(conditionPane)
-                .addIndentedChild(valuePane)
-                .addIndentedChild(formattingPane)
-                .build();
-
-            taskPaneControl.addToStack(rulePane);
-
-            CollapsablePane secondRulePane = TitledCollapsablePaneBuilder
-                .create("Rule 2")
-                .collapsed(true)
-                .addIndentedChild(new TextBox())
-                .build();
-
-            taskPaneControl.addToStack(secondRulePane);
+        private void updateFormula() {
+            //TODO compose formula from rules, update in selection
         }
 
     }

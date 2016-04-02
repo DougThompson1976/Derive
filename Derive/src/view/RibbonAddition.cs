@@ -56,11 +56,11 @@ namespace Derive.view
         public void onButtonDeriveAction(Office.IRibbonControl control, bool pressed) {
             if(pressed) {
                 buttonDeriveChecked = true;
-                ExcelController.Instance.showTaskPane();
+                DeriveController.Instance.showTaskPane();
             }
             else {
                 buttonDeriveChecked = false;
-                ExcelController.Instance.hideTaskPane();
+                DeriveController.Instance.hideTaskPane();
             }
         }
 

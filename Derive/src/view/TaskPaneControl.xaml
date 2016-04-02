@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ScrollViewer x:Name="scrollViewer">
-            <StackPanel x:Name="stack" Height="300" Width="290" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ScrollViewer x:Name="scrollviewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="stack" Margin="0,0,5,0" CanVerticallyScroll="True"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
