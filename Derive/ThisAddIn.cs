@@ -28,6 +28,9 @@ namespace Derive
                 workbook.SheetSelectionChange += (o, r) => {
                     deriveController.onSelectionChange(r);
                 };
+                workbook.SheetChange += (o, r) => {
+                    deriveController.onContentsChange(r);
+                };
             };
         }
 

@@ -213,6 +213,8 @@
     <Compile Include="src\control\DeriveController.cs" />
     <Compile Include="src\model\FormulaElement.cs" />
     <Compile Include="src\model\Rule.cs" />
+    <Compile Include="src\model\RuleList.cs" />
+    <Compile Include="src\model\RuleListFormulaComposer.cs" />
     <Compile Include="src\model\RuleListFormulaParser.cs" />
     <Compile Include="src\control\RuleListController.cs" />
     <Compile Include="src\view\CollapsablePane.xaml.cs">
@@ -222,7 +224,7 @@
       <DependentUpon>FormulaBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="src\view\RibbonAddition.cs" />
-    <Compile Include="src\view\RulePaneBuilder.cs" />
+    <Compile Include="src\view\RulePane.cs" />
     <Compile Include="src\view\TaskPaneControl.xaml.cs">
       <DependentUpon>TaskPaneControl.xaml</DependentUpon>
     </Compile>

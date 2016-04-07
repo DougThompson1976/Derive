@@ -24,7 +24,31 @@ namespace Derive.view {
             return new TitledCollapsablePaneBuilder(pane, title);
         }
 
-        private void addEditableLabelToTitle(CollapsablePane pane, String title) {
+        #region configuration
+
+        public TitledCollapsablePaneBuilder collapsed(bool collapsed) {
+            this.pane.Collapsed = collapsed;
+            return this;
+        }
+
+        public TitledCollapsablePaneBuilder titleEditable(bool editable) {
+            this.titleTextEditable = editable;
+            return this;
+        }
+
+        public TitledCollapsablePaneBuilder addIndentedChild(Control childControl) {
+            pane.addIndentedChild(childControl);
+            return this;
+        }
+
+        public TitledCollapsablePaneBuilder addChild(Control childContol) {
+            pane.addChild(childContol);
+            return this;
+        }
+
+        #endregion
+
+        private void addEditableLabelToTitle() {
             // create, fill and add label
             Label label = new Label();
             label.Content = title;
@@ -44,7 +68,7 @@ namespace Derive.view {
             );
             // hide textbox
             textBox.Visibility = Visibility.Hidden;
-            
+
             // define enter textbox action
             Action enterTextbox = () => {
                 // switch visibilities
@@ -78,8 +102,7 @@ namespace Derive.view {
                 if (e.Key == System.Windows.Input.Key.Enter) {
                     label.Content = textBox.Text;
                     leaveTextbox();
-                }
-                else if (e.Key == System.Windows.Input.Key.Escape) {
+                } else if (e.Key == System.Windows.Input.Key.Escape) {
                     leaveTextbox();
                 }
             };
@@ -87,32 +110,8 @@ namespace Derive.view {
             textBox.LostFocus += (o, e) => leaveTextbox();
         }
 
-        #region configuration
-
-        public TitledCollapsablePaneBuilder collapsed(bool collapsed) {
-            this.pane.Collapsed = collapsed;
-            return this;
-        }
-
-        public TitledCollapsablePaneBuilder titleEditable(bool editable) {
-            this.titleTextEditable = editable;
-            return this;
-        }
-
-        public TitledCollapsablePaneBuilder addIndentedChild(Control childControl) {
-            pane.addIndentedChild(childControl);
-            return this;
-        }
-
-        public TitledCollapsablePaneBuilder addChild(Control childContol) {
-            pane.addChild(childContol);
-            return this;
-        }
-
-        #endregion
-
         public CollapsablePane build() {
-            addEditableLabelToTitle(pane, title);
+            addEditableLabelToTitle();
 
             return pane;
         }

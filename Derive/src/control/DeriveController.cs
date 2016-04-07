@@ -36,10 +36,20 @@ namespace Derive.control
         #region workbook events
 
         public void onSelectionChange(Range target) {
+            updateRuleList(target);
+        }
+
+        public void onContentsChange(Range changed) {
+            if (this.ruleListController != null && ! ruleListController.taskPaneControlMatches(changed)) {
+                updateRuleList(changed);
+            }
+        }
+
+        private void updateRuleList(Range cells) {
             if (this.ruleListController != null) {
                 this.ruleListController.clearTaskPaneControl();
             }
-            this.ruleListController = new RuleListController(taskPaneControl, target);
+            this.ruleListController = new RuleListController(taskPaneControl, cells);
         }
 
         #endregion

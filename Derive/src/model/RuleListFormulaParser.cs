@@ -16,8 +16,8 @@ namespace Derive.model {
             }
         }
 
-        private List<Rule> result;
-        public List<Rule> Result {
+        private RuleList result;
+        public RuleList Result {
             /// <exception cref="FormatException">The input was not a correctly formatted rule formula.</exception>
             get {
                 if (!HasAttemptedParse) {
@@ -52,6 +52,10 @@ namespace Derive.model {
             this.formula = formula;
         }
 
+        /**
+         * A correctly formatted formula is one that can be fit onto the rule format, even when some conditions
+         * or values are not correctly formatted.
+         */
         public bool isCorrectlyFormatted() {
             if (!HasAttemptedParse) {
                 attemptParse();
@@ -61,16 +65,16 @@ namespace Derive.model {
 
         private void attemptParse() {
             if (formula == "") {
-                // an empty formula results in an empty rule list
-                this.result = new List<Rule>();
+                // an empty formula results in an empty rule list with an empty default value
+                this.result = new RuleList(new List<Rule>(), "");
             } else if (formula[0] != FormulaElement.Symbol.FORMULA_ROOT) {
-                // a constant is a rule list with one rule that has condition True
-                this.result = new Rule[] { new Rule(FormulaElement.Boolean.TRUE, formula) }.ToList();
+                // a constant results in an empty rule list with the constant as default value
+                this.result = new RuleList(new List<Rule>(), formula);
             } else {
                 try {
-                    List<Rule> rules = new List<Rule>();
-                    parseRecursively(formula.Substring(1), rules);
-                    this.result = rules;
+                    RuleList ruleList = new RuleList(new List<Rule>(), "");
+                    parseRecursively(formula.Substring(1), ruleList);
+                    this.result = ruleList;
                 } catch (FormatException fe) {
                     parseException = fe;
                 } catch (Exception e) {
@@ -79,17 +83,17 @@ namespace Derive.model {
             }
         }
 
-        private void parseRecursively(String formula, List<Rule> rules) {
+        private void parseRecursively(String formula, RuleList ruleList) {
             if (! formula.StartsWith(FormulaElement.Function.IF)) {
                 // arrived at the default value, resulting in a rule with condition True
-                rules.Add(new Rule(FormulaElement.Boolean.TRUE, formula));
+                ruleList.DefaultValue = formula;
             } else {
                 // get and check the arguments, parse recursively
                 List<String> ifArguments = getArguments(formula);
                 if (ifArguments.Count != 3) throw new FormatException("The IF call [" + formula + "] doesn't have three arguments.");
                 // TODO check first two arguments validity
-                rules.Add(new Rule(ifArguments[0], ifArguments[1]));
-                parseRecursively(ifArguments[2], rules);
+                ruleList.Rules.Add(new Rule(ifArguments[0], ifArguments[1]));
+                parseRecursively(ifArguments[2], ruleList);
             }
         }
 
