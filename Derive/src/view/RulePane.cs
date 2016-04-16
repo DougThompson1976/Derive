@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Derive.view {
-    class RulePane : CollapsablePane {
+    class RulePane : VitaLib.src.CollapsablePane {
 
         private Label titleLabel;
         private TextBox conditionTextBox;
@@ -55,13 +55,13 @@ namespace Derive.view {
             addTitle(titleLabel);
             // condition
             conditionTextBox.TextChanged += (o, e) => OnConditionChange(new ConditionChangeEventArgs(conditionTextBox.Text));
-            addIndentedChild(TitledCollapsablePaneBuilder.create("Condition")
+            addIndentedChild(VitaLib.src.TitledCollapsablePaneBuilder.create("Condition")
                 .addIndentedChild(conditionTextBox)
                 .collapsed(false)
                 .build());
             // value
             valueTextBox.TextChanged += (o, e) => OnValueChange(new ValueChangeEventArgs(valueTextBox.Text));
-            addIndentedChild(TitledCollapsablePaneBuilder.create("Value")
+            addIndentedChild(VitaLib.src.TitledCollapsablePaneBuilder.create("Value")
                 .addIndentedChild(valueTextBox)
                 .collapsed(false)
                 .build());

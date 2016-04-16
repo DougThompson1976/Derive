@@ -162,6 +162,13 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="..\VitaLib\src\CollapsablePane.xaml.cs">
+      <Link>src\view\linked\CollapsablePane.xaml.cs</Link>
+      <DependentUpon>CollapsablePane.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\VitaLib\src\TitledCollapsablePaneBuilder.cs">
+      <Link>src\view\linked\TitledCollapsablePaneBuilder.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -217,9 +224,6 @@
     <Compile Include="src\model\RuleListFormulaComposer.cs" />
     <Compile Include="src\model\RuleListFormulaParser.cs" />
     <Compile Include="src\control\RuleListController.cs" />
-    <Compile Include="src\view\CollapsablePane.xaml.cs">
-      <DependentUpon>CollapsablePane.xaml</DependentUpon>
-    </Compile>
     <Compile Include="src\view\FormulaBox.xaml.cs">
       <DependentUpon>FormulaBox.xaml</DependentUpon>
     </Compile>
@@ -228,7 +232,6 @@
     <Compile Include="src\view\TaskPaneControl.xaml.cs">
       <DependentUpon>TaskPaneControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="src\view\TitledCollapsablePaneBuilder.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -240,16 +243,15 @@
     </Compile>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="test\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="src\view\RibbonAddition.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="src\view\CollapsablePane.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="..\VitaLib\src\CollapsablePane.xaml">
+      <Link>src\view\linked\CollapsablePane.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="src\view\FormulaBox.xaml">
       <SubType>Designer</SubType>
@@ -264,6 +266,12 @@
     <Resource Include="res\iconCollapse.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VitaLib\VitaLib.csproj">
+      <Project>{d0ae0392-7225-4fcd-b032-fdaea710a938}</Project>
+      <Name>VitaLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

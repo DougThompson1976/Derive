@@ -12,22 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VitaLib.src;
 
 namespace Derive.view {
     /// <summary>
     /// Interaction logic for TaskPaneControl.xaml
     /// </summary>
     public partial class TaskPaneControl : UserControl {
+
+        public EditableStackPanel Stack {
+            get {
+                return this.stack;
+            }
+        }
+
         public TaskPaneControl() {
             InitializeComponent();
-        }
-
-        public void addToStack(Control control) {
-            this.stack.Children.Add(control);
-        }
-
-        public void removeFromStack(Control control) {
-            this.stack.Children.Remove(control);
         }
     }
 }

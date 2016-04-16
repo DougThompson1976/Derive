@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Derive", "Derive\Derive.csproj", "{010DA431-6A9E-4B00-87AC-A50B8201D5F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VitaLib", "VitaLib\VitaLib.csproj", "{D0AE0392-7225-4FCD-B032-FDAEA710A938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VitaLibTest", "VitaLibTest\VitaLibTest.csproj", "{C36450D7-DB5C-4685-948F-944B99E6AF50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{010DA431-6A9E-4B00-87AC-A50B8201D5F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{010DA431-6A9E-4B00-87AC-A50B8201D5F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{010DA431-6A9E-4B00-87AC-A50B8201D5F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0AE0392-7225-4FCD-B032-FDAEA710A938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0AE0392-7225-4FCD-B032-FDAEA710A938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0AE0392-7225-4FCD-B032-FDAEA710A938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0AE0392-7225-4FCD-B032-FDAEA710A938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C36450D7-DB5C-4685-948F-944B99E6AF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C36450D7-DB5C-4685-948F-944B99E6AF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C36450D7-DB5C-4685-948F-944B99E6AF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C36450D7-DB5C-4685-948F-944B99E6AF50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

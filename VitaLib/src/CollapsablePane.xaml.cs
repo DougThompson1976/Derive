@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Derive.view {
+namespace VitaLib.src {
     /// <summary>
     /// Interaction logic for CollapsablePane.xaml
     /// </summary>

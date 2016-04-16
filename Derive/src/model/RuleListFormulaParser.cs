@@ -90,7 +90,9 @@ namespace Derive.model {
             } else {
                 // get and check the arguments, parse recursively
                 List<String> ifArguments = getArguments(formula);
-                if (ifArguments.Count != 3) throw new FormatException("The IF call [" + formula + "] doesn't have three arguments.");
+                if (ifArguments.Count != 3) {
+                    throw new FormatException("The IF call [" + formula + "] doesn't have three arguments.");
+                }
                 // TODO check first two arguments validity
                 ruleList.Rules.Add(new Rule(ifArguments[0], ifArguments[1]));
                 parseRecursively(ifArguments[2], ruleList);
@@ -122,7 +124,8 @@ namespace Derive.model {
                     // a top level separator was reached, the current argument ends at the PREVIOUS char
                     arguments.Add(functionCall.Substring(startCurrentArg, cursorPos - startCurrentArg));
                     startCurrentArg = cursorPos + 1;
-                } else if (cursorPos + 2 == functionCall.Length) {
+                }
+                if (cursorPos + 2 == functionCall.Length) {
                     // the last char was reached, the current argument ends at the CURRENT char
                     arguments.Add(functionCall.Substring(startCurrentArg, cursorPos - startCurrentArg + 1));
                 }

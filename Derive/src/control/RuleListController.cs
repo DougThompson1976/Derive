@@ -13,12 +13,19 @@ namespace Derive.control {
 
         private TaskPaneControl taskPaneControl;
         private List<RulePane> rulePanes = new List<RulePane>();
-        private CollapsablePane defaultValuePane;
+        private Boolean clearing = false;
+        private VitaLib.src.CollapsablePane defaultValuePane;
         System.Windows.Controls.TextBox defaultValueTextBox;
         private Range selection;
 
         public RuleListController(TaskPaneControl taskPaneControl, Range selection) {
             this.taskPaneControl = taskPaneControl;
+            this.taskPaneControl.Stack.ChildRemoved += (o, e) => {
+                if (!clearing && e.RemovedChild is RulePane && rulePanes.Contains((RulePane)e.RemovedChild)) {
+                    rulePanes.Remove((RulePane)e.RemovedChild);
+                    updateFormula();
+                }
+            };
             this.selection = selection;
 
             updateTaskPaneControl();
@@ -38,7 +45,9 @@ namespace Derive.control {
                 rulePane.ValueChange += (o, e) => updateFormula();
 
                 this.rulePanes.Add(rulePane);
-                this.taskPaneControl.addToStack(rulePane);
+                this.taskPaneControl.Stack.newChild(rulePane)
+                    .withRemoveButton()
+                    .add();
 
                 ruleNumber++;
             }
@@ -46,18 +55,21 @@ namespace Derive.control {
             defaultValueTextBox = new System.Windows.Controls.TextBox();
             defaultValueTextBox.Text = parser.Result.DefaultValue;
             defaultValueTextBox.TextChanged += (o, e) => updateFormula();
-            defaultValuePane = TitledCollapsablePaneBuilder.create("Default value")
+            defaultValuePane = VitaLib.src.TitledCollapsablePaneBuilder.create("Default value")
                 .addIndentedChild(defaultValueTextBox)
                 .collapsed(false)
                 .build();
-            this.taskPaneControl.addToStack(defaultValuePane);
+            this.taskPaneControl.Stack.newChild(defaultValuePane).add();
         }
 
         public void clearTaskPaneControl() {
+            clearing = true; // flag needed to intercept ChildRemoved events from taskPaneControl.Stack
             rulePanes.ForEach((rulePane) => {
-                this.taskPaneControl.removeFromStack(rulePane);
+                this.taskPaneControl.Stack.removeChild(rulePane);
             });
-            this.taskPaneControl.removeFromStack(defaultValuePane);
+            this.taskPaneControl.Stack.removeChild(defaultValuePane);
+            rulePanes.Clear();
+            clearing = false;
         }
 
         public bool taskPaneControlMatches(Range changed) {

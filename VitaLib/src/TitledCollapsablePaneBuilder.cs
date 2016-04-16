@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Derive.view {
-    class TitledCollapsablePaneBuilder {
+namespace VitaLib.src {
+    public class TitledCollapsablePaneBuilder {
 
         private CollapsablePane pane;
         private String title;
