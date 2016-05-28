@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="VitaLib.src.AddInBetweenButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="26.5" d:DesignWidth="161.25">
+    <DockPanel LastChildFill="True" Height="11">
+        <Border x:Name="rightSpace" BorderThickness="1" DockPanel.Dock="Right" Height="11" VerticalAlignment="Top" Width="11"/>
+        <Image x:Name="plusImage" Width="17" DockPanel.Dock="Right" Source="/VitaLib;component/res/addButtonPlus.png" Stretch="Fill" Cursor="Hand"/>
+        <Border x:Name="leftSpace" BorderThickness="1" DockPanel.Dock="Left" Height="11" VerticalAlignment="Top" Width="11"/>
+        <Image x:Name="lineImage" Margin="0" Source="/VitaLib;component/res/addButtonLine.png" Stretch="Fill"/>
+    </DockPanel>
+
+</UserControl>

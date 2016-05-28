@@ -47,7 +47,7 @@ namespace Derive.control
 
         private void updateRuleList(Range cells) {
             if (this.ruleListController != null) {
-                this.ruleListController.clearTaskPaneControl();
+                this.ruleListController.dispose();
             }
             this.ruleListController = new RuleListController(taskPaneControl, cells);
         }

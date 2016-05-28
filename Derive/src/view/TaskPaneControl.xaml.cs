@@ -20,9 +20,21 @@ namespace Derive.view {
     /// </summary>
     public partial class TaskPaneControl : UserControl {
 
-        public EditableStackPanel Stack {
+        public StackPanel Stack {
+            /**
+             * The stack that contains the rule panes and the default value pane
+             */
             get {
                 return this.stack;
+            }
+        }
+
+        public EditableStackPanel RulesStack {
+            /**
+             * The stack that only contains the rule panes, not the default value pane
+             */
+            get {
+                return this.rulesStack;
             }
         }
 

@@ -66,10 +66,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>images.resx</DependentUpon>
     </Compile>
+    <Compile Include="src\AddInBetweenButton.xaml.cs">
+      <DependentUpon>AddInBetweenButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="src\CollapsablePane.xaml.cs">
       <DependentUpon>CollapsablePane.xaml</DependentUpon>
     </Compile>
-    <Compile Include="src\EditableStackPanel.cs" />
+    <Compile Include="src\EditableStackPanel.xaml.cs">
+      <DependentUpon>EditableStackPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="src\TitledCollapsablePaneBuilder.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,7 +91,15 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="src\AddInBetweenButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="src\CollapsablePane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\EditableStackPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,6 +111,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\iconTrash.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\addButtonLine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\addButtonPlus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\iconDelete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

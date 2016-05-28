@@ -16,7 +16,7 @@ namespace Derive.model {
         private String value;
         public String Value {
             get { return value; }
-            set { value = value; }
+            set { this.value = value; }
         }
 
         public Rule(String condition, String value) {

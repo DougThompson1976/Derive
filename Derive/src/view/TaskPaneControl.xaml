@@ -8,7 +8,9 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <ScrollViewer x:Name="scrollviewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <src:EditableStackPanel x:Name="stack" Margin="0,0,5,0" CanVerticallyScroll="True"/>
+            <StackPanel x:Name="stack">
+                <src:EditableStackPanel x:Name="rulesStack" Margin="0,0,5,0" CanVerticallyScroll="True"/>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>
